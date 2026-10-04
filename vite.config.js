@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: './', // Ensures relative assets work on GitHub Pages, Netlify, or direct preview
+  base: '/portfolio-websiteee/', // GitHub Pages serves under /<repo-name>/
   server: {
     port: 3000,
     open: true

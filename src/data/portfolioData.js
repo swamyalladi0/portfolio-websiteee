@@ -25,7 +25,7 @@ export const portfolioData = {
       "I’m a Computer Science Engineering graduate passionate about building practical software solutions and learning modern technologies. I enjoy working with Python, SQL, Java, and problem-solving.",
     aboutDescription:
       "I am a 2026 Computer Science Engineering graduate with a strong foundation in core software development, programming, databases, and building useful applications. Passionate about writing clean, maintainable code, dissecting complex problems into elegant logic, and continuously exploring modern engineering practices.",
-    profilePhoto: "./src/assets/profile.jpg",
+    profilePhoto: "./src/assets/profile1.jpeg",
     resumeUrl: "./src/assets/resume.pdf",
     location: "Degam, Armoor, NZB, Telangana",
     email: "swamyalladi0@gmail.com",

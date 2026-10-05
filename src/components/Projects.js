@@ -79,7 +79,7 @@ export function renderProjects() {
                     <span class="hud-dot hud-dot-green"></span>
                   </div>
                   <span class="hud-file-label">
-                    ${project.id === 'project-1' ? 'guesser.py // python3' : (project.id === 'project-2' ? 'healthcare_schema.sql // PostgreSQL' : 'project_blueprint.config')}
+                    ${project.id === 'project-1' ? 'cancer_cnn_model.py // TensorFlow • Keras' : (project.id === 'project-2' ? 'healthcare_ml.py // Scikit-Learn • MySQL' : 'rag_policy_pipeline.py // LangChain • FAISS • LLMs')}
                   </span>
                 </div>
 
@@ -103,94 +103,107 @@ function renderProjectVisual(project) {
   if (project.id === 'project-1') {
     return `
       <div class="terminal-snippet">
-        <span class="token-kw">import</span> random<br><br>
-        <span class="token-kw">def</span> <span class="token-fn">play_guessing_game</span>():<br>
-        &nbsp;&nbsp;secret_number = random.<span class="token-fn">randint</span>(1, 100)<br>
-        &nbsp;&nbsp;attempts = 0<br>
-        &nbsp;&nbsp;<span class="token-kw">while</span> attempts &lt; 7:<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;guess = <span class="token-fn">int</span>(<span class="token-fn">input</span>(<span class="token-str">"Guess > "</span>))<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-kw">if</span> guess == secret_number:<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">print</span>(<span class="token-str">"[SUCCESS] Solved!"</span>)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-kw">return</span> True<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-comment"># Dynamic range evaluation</span>
+        <span class="token-comment"># Neural Network Architecture: CNN for Cancer Detection</span><br>
+        <span class="token-kw">import</span> tensorflow <span class="token-kw">as</span> tf<br>
+        <span class="token-kw">from</span> tensorflow.keras <span class="token-kw">import</span> layers, models<br><br>
+        model = models.<span class="token-fn">Sequential</span>([<br>
+        &nbsp;&nbsp;layers.<span class="token-fn">Conv2D</span>(32, (3,3), activation=<span class="token-str">'relu'</span>, input_shape=(224,224,3)),<br>
+        &nbsp;&nbsp;layers.<span class="token-fn">MaxPooling2D</span>(2, 2),<br>
+        &nbsp;&nbsp;layers.<span class="token-fn">Conv2D</span>(64, (3,3), activation=<span class="token-str">'relu'</span>),<br>
+        &nbsp;&nbsp;layers.<span class="token-fn">Dropout</span>(0.5),<br>
+        &nbsp;&nbsp;layers.<span class="token-fn">Dense</span>(2, activation=<span class="token-str">'softmax'</span>)<br>
+        ])
       </div>
 
-      <div class="terminal-interactive-hint">
-        <span>⚡ Interactive Python Terminal Available</span>
-        <button class="btn btn-outline open-demo-btn" data-project="project-1" style="padding: 4px 10px; font-size: 0.72rem;">Launch CLI →</button>
+      <div class="model-telemetry-hud">
+        <div class="telemetry-stat">
+          <span class="stat-label">Model Accuracy</span>
+          <span class="stat-val text-cyan">97.8%</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="stat-label">Inference Time</span>
+          <span class="stat-val text-purple">&lt; 42ms</span>
+        </div>
+        <div class="telemetry-stat">
+          <span class="stat-label">Architecture</span>
+          <span class="stat-val text-blue">CNN (Keras)</span>
+        </div>
       </div>
     `;
   }
 
   if (project.id === 'project-2') {
     return `
-      <div class="db-schema-visual">
-        <!-- Node 1: Patients & Appointments -->
+      <div class="terminal-snippet">
+        <span class="token-comment"># Healthcare ML Pipeline: Risk Stratification & Diagnosis</span><br>
+        <span class="token-kw">from</span> sklearn.ensemble <span class="token-kw">import</span> RandomForestClassifier<br>
+        <span class="token-kw">from</span> sklearn.metrics <span class="token-kw">import</span> classification_report<br><br>
+        clf = <span class="token-fn">RandomForestClassifier</span>(n_estimators=100, max_depth=8)<br>
+        clf.<span class="token-fn">fit</span>(X_train_clinical, y_train_diagnosis)<br>
+        predictions = clf.<span class="token-fn">predict</span>(X_test_vitals)
+      </div>
+
+      <div class="db-schema-visual" style="margin-top: 14px;">
         <div class="db-node-card">
           <div class="db-node-title">
-            <span>TABLE: patients</span>
-            <span class="badge" style="font-size: 0.65rem; padding: 2px 6px;">ENTITY</span>
+            <span>CLINICAL DATASET SCHEMA (MySQL)</span>
+            <span class="badge" style="font-size: 0.65rem; padding: 2px 6px;">HEALTHCARE</span>
           </div>
           <div class="db-fields-list">
             <span class="db-field-pill db-field-pk">PK patient_id</span>
-            <span class="db-field-pill">patient_name</span>
-            <span class="db-field-pill">dob</span>
-            <span class="db-field-pill">blood_group</span>
-            <span class="db-field-pill">contact_no</span>
+            <span class="db-field-pill">biomarkers</span>
+            <span class="db-field-pill">vital_signs</span>
+            <span class="db-field-pill">predicted_risk</span>
+            <span class="db-field-pill">diagnosis_outcome</span>
           </div>
         </div>
-
-        <!-- Node 2: Doctors & Hospitals -->
-        <div class="db-node-card">
-          <div class="db-node-title">
-            <span>TABLE: appointments</span>
-            <span class="badge" style="font-size: 0.65rem; padding: 2px 6px;">RELATION</span>
-          </div>
-          <div class="db-fields-list">
-            <span class="db-field-pill db-field-pk">PK appointment_id</span>
-            <span class="db-field-pill">FK patient_id</span>
-            <span class="db-field-pill">FK doctor_id</span>
-            <span class="db-field-pill">FK room_id</span>
-            <span class="db-field-pill">status</span>
-          </div>
-        </div>
-
-        <!-- Node 3: Rooms / Hospitals -->
-        <div class="db-node-card" style="opacity: 0.85;">
-          <div class="db-node-title">
-            <span>TABLE: hospitals_and_rooms</span>
-            <span class="badge" style="font-size: 0.65rem; padding: 2px 6px;">FACILITY</span>
-          </div>
-          <div class="db-fields-list">
-            <span class="db-field-pill db-field-pk">PK room_id</span>
-            <span class="db-field-pill">FK hospital_id</span>
-            <span class="db-field-pill">room_type</span>
-            <span class="db-field-pill">is_occupied</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="terminal-interactive-hint" style="margin-top: 14px;">
-        <span>🔍 Explore Relational Queries & Joins</span>
-        <button class="btn btn-outline open-demo-btn" data-project="project-2" style="padding: 4px 10px; font-size: 0.72rem;">Open Schema →</button>
       </div>
     `;
   }
 
-  // Project 3 Blueprint Mockup
+  // Project 3: University Policy Chatbot (RAG-Based)
   return `
-    <div class="blueprint-card">
-      <div class="blueprint-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="16"></line>
-          <line x1="8" y1="12" x2="16" y2="12"></line>
-        </svg>
+    <div class="rag-visual-flow">
+      <div class="rag-step-pill">
+        <span class="step-num">01</span>
+        <span class="step-name">Policy PDFs</span>
       </div>
-      <span style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">SLOT READY FOR PROJECT 03</span>
-      <p style="font-size: 0.78rem; color: var(--text-dim); max-width: 260px;">
-        Easily update project details in <code>src/data/portfolioData.js</code>.
-      </p>
+      <span class="flow-arrow">→</span>
+      <div class="rag-step-pill">
+        <span class="step-num">02</span>
+        <span class="step-name">Embeddings</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="rag-step-pill">
+        <span class="step-num">03</span>
+        <span class="step-name">FAISS Index</span>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="rag-step-pill">
+        <span class="step-num">04</span>
+        <span class="step-name">LLM Output</span>
+      </div>
+    </div>
+
+    <div class="terminal-snippet" style="margin-top: 14px;">
+      <span class="token-comment">// Query: "What is the policy for attendance & exam condonation?"</span><br>
+      <span class="token-kw">&gt; Retrieved 4 relevant chunks from FAISS (cosine sim &gt; 0.88)</span><br>
+      <span class="token-str">&gt; "Per Section 4.2: Minimum 75% attendance is required to qualify for end-semester examinations..."</span>
+    </div>
+
+    <div class="model-telemetry-hud" style="margin-top: 10px;">
+      <div class="telemetry-stat">
+        <span class="stat-label">Vector Store</span>
+        <span class="stat-val text-purple">FAISS</span>
+      </div>
+      <div class="telemetry-stat">
+        <span class="stat-label">Framework</span>
+        <span class="stat-val text-blue">LangChain</span>
+      </div>
+      <div class="telemetry-stat">
+        <span class="stat-label">Retrieval</span>
+        <span class="stat-val text-emerald">Semantic</span>
+      </div>
     </div>
   `;
 }

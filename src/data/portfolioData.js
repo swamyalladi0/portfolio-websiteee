@@ -22,15 +22,15 @@ export const portfolioData = {
     eyebrow: "COMPUTER SCIENCE ENGINEERING • 2026",
     tagline: "I build digital experiences with code.",
     shortBio:
-      "I’m a Computer Science Engineering graduate passionate about building practical software solutions and learning modern technologies. I enjoy working with Python, SQL, Java, and problem-solving.",
+      "I’m a Computer Science Engineering graduate passionate about building practical software solutions, intelligent AI/ML systems, and learning modern technologies. I enjoy working with Python, Deep Learning, RAG, SQL, and problem-solving.",
     aboutDescription:
-      "I am a 2026 Computer Science Engineering graduate with a strong foundation in core software development, programming, databases, and building useful applications. Passionate about writing clean, maintainable code, dissecting complex problems into elegant logic, and continuously exploring modern engineering practices.",
+      "I am a 2026 Computer Science Engineering graduate with a strong foundation in software engineering, machine learning, and intelligent applications. Passionate about building impactful systems — from deep learning CNNs for cancer detection to RAG-powered chatbots with LangChain and FAISS, and robust relational database architectures.",
     profilePhoto: "./src/assets/profile1.jpeg",
     resumeUrl: "./src/assets/resume.pdf",
     location: "Degam, Armoor, NZB, Telangana",
     email: "swamyalladi0@gmail.com",
     github: "https://github.com/swamyalladi0",
-    linkedin: "https://linkedin.com/in/[YOUR-LINKEDIN]",
+    linkedin: "https://www.linkedin.com/in/swamy-alladi-2b60a4378/",
     status: "Available for Software Developer Opportunities",
   },
 
@@ -43,22 +43,22 @@ export const portfolioData = {
       icon: "graduation-cap"
     },
     {
+      metric: "AI / ML",
+      label: "Deep Learning & RAG",
+      description: "CNN image classification, LangChain, FAISS semantic search, and LLMs.",
+      icon: "cpu"
+    },
+    {
       metric: "Python",
-      label: "Development",
-      description: "Algorithm scripting, automation, logic design, and problem solving.",
+      label: "Core Engineering",
+      description: "TensorFlow, Keras, Scikit-learn, REST APIs, algorithms, and OOP.",
       icon: "code"
     },
     {
-      metric: "SQL",
-      label: "Database",
-      description: "Relational schema design, normalization, joins, and data queries.",
+      metric: "Database",
+      label: "SQL & Schemas",
+      description: "Relational modeling, normalization, analytical queries, and DBMS.",
       icon: "database"
-    },
-    {
-      metric: "Problem Solving",
-      label: "Continuous Learning",
-      description: "Focused on core data structures, OOP principles, and clean code.",
-      icon: "cpu"
     }
   ],
 
@@ -80,6 +80,36 @@ export const portfolioData = {
           level: "Object-Oriented",
           description: "Classes, inheritance, polymorphism, encapsulation, and type safety.",
           icon: "java"
+        }
+      ]
+    },
+    {
+      category: "AI & Machine Learning",
+      description: "Deep learning models, CNN architectures, LangChain, and RAG pipelines.",
+      skills: [
+        {
+          name: "Deep Learning & CNN",
+          level: "TensorFlow / Keras",
+          description: "Convolutional neural networks, model training, and medical image classification.",
+          icon: "cpu"
+        },
+        {
+          name: "LangChain & RAG",
+          level: "Generative AI",
+          description: "Retrieval-Augmented Generation, vector embeddings, and LLM context orchestration.",
+          icon: "layers"
+        },
+        {
+          name: "FAISS Vector Search",
+          level: "Semantic Retrieval",
+          description: "High-dimensional vector indexing, similarity search, and policy document retrieval.",
+          icon: "database"
+        },
+        {
+          name: "ML & Data Science",
+          level: "Scikit-Learn / Pandas",
+          description: "Classification, regression, OpenCV image processing, NumPy, and data pipelines.",
+          icon: "code"
         }
       ]
     },
@@ -168,136 +198,139 @@ export const portfolioData = {
     {
       id: "project-1",
       number: "01",
-      title: "Number Guessing Game",
-      tagline: "Python Logic & Interactive CLI Application",
+      title: "Early Detection of Cancer Using AI",
+      tagline: "Deep Learning & CNN-Based Medical Image Classification",
       description:
-        "A beginner-friendly Python project demonstrating user input, conditional logic, loops, and basic programming concepts.",
-      techStack: ["Python", "Control Flow", "CLI"],
-      codeUrl: "https://github.com/swamyalladi0/number-guessing-game",
-      demoUrl: "#demo-guessing-game", // Triggers interactive in-browser terminal
-      hasLiveDemo: true,
+        "Developed an AI-based cancer detection system that uses machine learning and deep learning techniques to support the early identification of cancer. The project analyzes medical data and images to identify patterns associated with cancer and provide faster, more accurate predictive results.",
+      techStack: ["Python", "TensorFlow", "Keras", "CNN", "OpenCV", "NumPy", "Pandas", "Scikit-learn", "Deep Learning"],
+      codeUrl: "https://github.com/swamyalladi0",
+      demoUrl: "#",
+      hasLiveDemo: false,
       visualType: "terminal",
       highlights: [
-        "Dynamic secret number generation using pseudorandom entropy",
-        "Input validation loop handling non-numeric edge cases gracefully",
-        "Adaptive feedback system calculating distance to target (Hot / Cold / Too High / Too Low)",
-        "Turn counter and score evaluation based on trial efficiency"
+        "Implemented a Convolutional Neural Network (CNN) model using TensorFlow/Keras for image-based cancer classification",
+        "Applied OpenCV for medical image preprocessing — resizing, normalization, and augmentation pipelines",
+        "Trained the model on labeled medical imaging datasets to distinguish benign and malignant patterns",
+        "Evaluated model performance using precision, recall, F1-score, and confusion matrix analysis",
+        "Optimized inference speed to support faster diagnostic decision-making in clinical workflows"
       ],
-      codeSnippet: `import random
+      codeSnippet: `import tensorflow as tf
+from tensorflow.keras import layers, models
+import cv2, numpy as np
 
-def play_guessing_game():
-    secret_number = random.randint(1, 100)
-    attempts = 0
-    max_attempts = 7
-    
-    print("=== QUANTUM NUMBER GUESSER ===")
-    print("Range: [1 - 100] | Attempts: 7")
-    
-    while attempts < max_attempts:
-        guess_input = input(f"Attempt {attempts + 1}/{max_attempts} > ")
-        if not guess_input.isdigit():
-            print("[WARN] Please enter a valid integer.")
-            continue
-            
-        guess = int(guess_input)
-        attempts += 1
-        
-        if guess == secret_number:
-            print(f"[SUCCESS] Target unlocked in {attempts} attempts!")
-            return True
-        elif guess < secret_number:
-            print(">> Target is HIGHER.")
-        else:
-            print(">> Target is LOWER.")
-            
-    print(f"[FAILED] Out of tries. Secret was {secret_number}.")
-    return False
+def build_cancer_cnn(input_shape=(224, 224, 3), num_classes=2):
+    model = models.Sequential([
+        layers.Conv2D(32, (3,3), activation='relu', input_shape=input_shape),
+        layers.MaxPooling2D(2, 2),
+        layers.Conv2D(64, (3,3), activation='relu'),
+        layers.MaxPooling2D(2, 2),
+        layers.Conv2D(128, (3,3), activation='relu'),
+        layers.GlobalAveragePooling2D(),
+        layers.Dense(256, activation='relu'),
+        layers.Dropout(0.5),
+        layers.Dense(num_classes, activation='softmax')
+    ])
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
 
-if __name__ == "__main__":
-    play_guessing_game()`
+model = build_cancer_cnn()
+model.summary()`
     },
     {
       id: "project-2",
       number: "02",
-      title: "SQL / Database Project",
-      tagline: "Relational Healthcare Schema & Query Suite",
+      title: "Applications of Machine Learning in Medical Care",
+      tagline: "ML-Powered Healthcare Intelligence & Disease Prediction",
       description:
-        "A collection of SQL queries and database exercises involving patients, doctors, hospitals, medicines, labs, appointments, and rooms.",
-      techStack: ["SQL", "Database", "DBMS", "Schema Design"],
-      codeUrl: "https://github.com/swamyalladi0/hospital-management-sql",
-      demoUrl: "#demo-sql-explorer", // Triggers interactive Schema Visualizer
-      hasLiveDemo: true,
+        "Explored the applications of Machine Learning in the healthcare domain, focusing on how data-driven techniques can support disease prediction, diagnosis, medical image analysis, drug discovery, patient monitoring, and personalized medicine. The project examined the role of ML in assisting healthcare professionals and enabling data-driven medical decision-making.",
+      techStack: ["Python", "Machine Learning", "HTML", "CSS", "JavaScript", "MySQL", "Scikit-learn", "Pandas"],
+      codeUrl: "https://github.com/swamyalladi0",
+      demoUrl: "#",
+      hasLiveDemo: false,
       visualType: "database",
       highlights: [
-        "Entity-Relationship model comprising Patients, Doctors, Hospitals, Appointments, Rooms, Labs, and Prescriptions",
-        "Multi-table JOIN operations matching patients with doctors and designated hospital wards",
-        "Aggregate analytical queries evaluating doctor workload, bed occupancy, and departmental metrics",
-        "Integrity constraints, primary/foreign key cascading, and index optimizations"
+        "Researched and implemented ML models for disease prediction and early diagnosis across multiple medical conditions",
+        "Built a data pipeline using Pandas for cleaning, transforming, and preparing patient health datasets",
+        "Developed classification and regression models for patient risk stratification and outcome prediction",
+        "Designed an interactive web dashboard using HTML, CSS, and JavaScript to visualize model insights",
+        "Integrated MySQL database for structured patient data storage, retrieval, and query-based analysis"
       ],
       sampleQueries: [
         {
-          name: "Doctor Appointment Schedule with Room & Ward Lookup",
+          name: "Patient Risk Score Analysis by Condition",
           sql: `SELECT 
-    a.appointment_id,
-    p.patient_name,
-    p.contact_number,
-    d.doctor_name,
-    d.specialization,
-    h.hospital_name,
-    r.room_number,
-    r.room_type,
-    a.scheduled_time,
-    a.status
-FROM appointments a
-JOIN patients p ON a.patient_id = p.patient_id
-JOIN doctors d ON a.doctor_id = d.doctor_id
-JOIN hospitals h ON d.hospital_id = h.hospital_id
-LEFT JOIN rooms r ON a.assigned_room_id = r.room_id
-WHERE a.status = 'CONFIRMED'
-ORDER BY a.scheduled_time ASC;`
+    p.patient_id,
+    p.age,
+    p.gender,
+    p.condition,
+    ml.predicted_risk_score,
+    ml.confidence_percent,
+    ml.recommended_action
+FROM patients p
+JOIN ml_predictions ml ON p.patient_id = ml.patient_id
+WHERE ml.confidence_percent > 75
+ORDER BY ml.predicted_risk_score DESC
+LIMIT 20;`
         },
         {
-          name: "Hospital Bed Occupancy & Department Utilization",
+          name: "Disease Frequency & ML Accuracy by Category",
           sql: `SELECT 
-    h.hospital_name,
-    r.room_type,
-    COUNT(r.room_id) AS total_rooms,
-    SUM(CASE WHEN r.is_occupied = 1 THEN 1 ELSE 0 END) AS occupied_rooms,
-    ROUND((SUM(CASE WHEN r.is_occupied = 1 THEN 1.0 ELSE 0.0 END) / COUNT(r.room_id)) * 100, 2) AS occupancy_rate
-FROM hospitals h
-JOIN rooms r ON h.hospital_id = r.hospital_id
-GROUP BY h.hospital_name, r.room_type
-ORDER BY occupancy_rate DESC;`
+    condition_type,
+    COUNT(*) AS total_cases,
+    ROUND(AVG(accuracy_score) * 100, 2) AS avg_accuracy_pct,
+    SUM(CASE WHEN outcome = 'correct' THEN 1 ELSE 0 END) AS correct_predictions
+FROM ml_results
+GROUP BY condition_type
+ORDER BY avg_accuracy_pct DESC;`
         }
       ]
     },
     {
       id: "project-3",
       number: "03",
-      title: "[ADD MY PROJECT HERE]",
-      tagline: "Upcoming Software Engineering Project",
+      title: "University Policy Chatbot (RAG-Based)",
+      tagline: "Retrieval-Augmented Generation for Institutional Documents",
       description:
-        "Placeholder for your upcoming software or web application. Easily update the title, description, and links in portfolioData.js.",
-      techStack: ["Python", "SQL", "Web"],
-      codeUrl: "https://github.com/swamyalladi0/[PROJECT-REPO]",
-      demoUrl: "https://[YOUR-DEMO-URL].com",
+        "Developed a Retrieval-Augmented Generation (RAG) chatbot to retrieve and generate accurate, context-aware responses from institutional policy documents. Built a semantic search pipeline using embeddings and FAISS for efficient document retrieval, integrated with LangChain and Large Language Models (LLMs) for intelligent response generation.",
+      techStack: ["Python", "LangChain", "FAISS", "LLMs", "REST APIs", "RAG", "Embeddings", "NLP"],
+      codeUrl: "https://github.com/swamyalladi0",
+      demoUrl: "#",
       hasLiveDemo: false,
       visualType: "code",
       highlights: [
-        "Configurable slot for your third major course or personal project",
-        "Seamless integration with GitHub repository links and live web deployments",
-        "Matches the futuristic dark visual design language of the portfolio"
+        "Built a semantic search pipeline using vector embeddings and FAISS for fast, accurate document chunk retrieval",
+        "Integrated LangChain with Large Language Models (LLMs) to enable context-aware, grounded response generation",
+        "Implemented document ingestion, chunking, and embedding workflows for institutional policy PDFs",
+        "Designed REST API endpoints for chatbot query processing and response delivery",
+        "Optimized query processing and backend workflows to reduce response latency and improve system performance"
       ],
-      codeSnippet: `// Configuration for Project 03 in src/data/portfolioData.js:
-{
-  number: "03",
-  title: "Your Project Title",
-  tagline: "Your Project Subtitle",
-  description: "Detailed description of the problem solved and architecture...",
-  techStack: ["Python", "SQL", "JavaScript"],
-  codeUrl: "https://github.com/your-username/repo-name",
-  demoUrl: "https://your-demo-link.com"
-}`
+      codeSnippet: `from langchain.vectorstores import FAISS
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
+from langchain.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# Load & chunk institutional policy documents
+loader = PyPDFLoader("university_policy.pdf")
+docs = loader.load()
+splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=50)
+chunks = splitter.split_documents(docs)
+
+# Build FAISS vector store with semantic embeddings
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+vectorstore = FAISS.from_documents(chunks, embeddings)
+
+# RAG chain: retrieve → generate context-aware answer
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(temperature=0),
+    retriever=vectorstore.as_retriever(search_kwargs={"k": 4})
+)
+
+response = qa_chain.run("What is the attendance policy?")
+print(response)`
     }
   ],
 
@@ -343,8 +376,8 @@ ORDER BY occupancy_rate DESC;`
     email: "swamyalladi0@gmail.com",
     github: "https://github.com/swamyalladi0",
     githubUsername: "@swamyalladi0",
-    linkedin: "https://linkedin.com/in/[YOUR-LINKEDIN]",
-    linkedinUsername: "in/[YOUR-LINKEDIN]",
+    linkedin: "https://www.linkedin.com/in/swamy-alladi-2b60a4378/",
+    linkedinUsername: "in/swamy-alladi-2b60a4378",
     location: "Degam, Armoor, NZB, Telangana",
     availability: "Available for internships & full-time junior developer roles (2026)",
     note: "Response time: Typically within 24-48 hours."
